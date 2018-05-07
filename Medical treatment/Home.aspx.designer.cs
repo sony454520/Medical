@@ -67,13 +67,22 @@ namespace Medical_treatment {
         protected global::System.Web.UI.WebControls.RadioButtonList Sex;
         
         /// <summary>
-        /// Phone 控制項。
+        /// Phone1 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Phone;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText Phone1;
+        
+        /// <summary>
+        /// Phone2 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText Phone2;
         
         /// <summary>
         /// Note 控制項。

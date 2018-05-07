@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -92,7 +93,9 @@ namespace Medical_treatment
 
             //GridView1.DataSource = data.getDataSet(strcmd);
             //GridView1.DataBind();
-            ListView1.DataSource = data.getDataSet(strcmd);
+            DataSet dt = data.getDataSet(strcmd);
+
+            ListView1.DataSource = dt;
             ListView1.DataBind();
         }
 
@@ -103,7 +106,8 @@ namespace Medical_treatment
             identity.Value = "";
             Firstvisit_Date.Value = "";
             Born_Date.Value = "";
-            Phone.Value = "";
+            Phone1.Value = "";
+            Phone2.Value = "";
             Note.Value = "";
             Addr.Value = "";
             ListView1.DataSource = null;
@@ -129,7 +133,7 @@ namespace Medical_treatment
                 errormes += "出生年月日未填寫\\n";
                 iserror = true;
             }
-            if(Phone.Value == "")
+            if(Phone1.Value == "" || Phone2.Value == "")
             {
                 errormes += "電話未填寫\\n";
                 iserror = true;
@@ -163,7 +167,7 @@ namespace Medical_treatment
                     {
                         firstDate = Firstvisit_Date.Value;
                     }
-                    cmd = "Insert into Patient(Name,Firstvisit_Date,Sex,[identity],Born_Date,Phone,addr,Note) Values('" + Name.Value + "','" + firstDate + "','" + Sex.SelectedValue + "','" + identity.Value + "','" + Born_Date.Value + "','" + Phone.Value + "','" + Addr.Value + "','" + Note.Value + "')";
+                    cmd = "Insert into Patient(Name,Firstvisit_Date,Sex,[identity],Born_Date,Phone,addr,Note) Values('" + Name.Value + "','" + firstDate + "','" + Sex.SelectedValue + "','" + identity.Value + "','" + Born_Date.Value + "','" + Phone1.Value + "','" + Addr.Value + "','" + Note.Value + "')";
                     if (data.execsql(cmd))
                     {
                         Response.Write("<script  LANGUAGE='JavaScript'>alert('新增成功');</script>");

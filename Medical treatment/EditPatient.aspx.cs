@@ -13,8 +13,7 @@ namespace Medical_treatment
         ADOdatNET data = new ADOdatNET();
         protected void Page_Load(object sender, EventArgs e)
         {
-            UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
-            
+            UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;            
             if(!Page.IsPostBack)
             {
                 String Patient_ID = Request.QueryString["P_ID"];
@@ -26,19 +25,23 @@ namespace Medical_treatment
                 {
                     String cmd = "select * from Patient where P_ID=" + Patient_ID;
                     DataSet ds = data.getDataSet(cmd);
-                    //Name.Attributes.Add("placeholder", ds.Tables[0].Rows[0]["Name"].ToString());
-                    //P_ID.Attributes.Add("placeholder", ds.Tables[0].Rows[0]["P_ID"].ToString());
-                    //Firstvisit_Date.Attributes.Add("placeholder", ds.Tables[0].Rows[0]["Firstvisit_Date"].ToString());
-
-                    Name.Value = ds.Tables[0].Rows[0]["Name"].ToString();
-                    P_ID.Value = ds.Tables[0].Rows[0]["P_ID"].ToString();
-                    Firstvisit_Date.Value = Dateformat(ds.Tables[0].Rows[0]["Firstvisit_Date"].ToString());
-                    Sex.SelectedValue = ds.Tables[0].Rows[0]["sex"].ToString();
-                    identity.Value = ds.Tables[0].Rows[0]["identity"].ToString();
-                    Born_Date.Value = Dateformat(ds.Tables[0].Rows[0]["Born_Date"].ToString());
-                    Phone.Value = ds.Tables[0].Rows[0]["Phone"].ToString();
-                    Addr.Value = ds.Tables[0].Rows[0]["addr"].ToString();
-                    Note.Value = ds.Tables[0].Rows[0]["Note"].ToString();
+                    if (ds.Tables[0].Rows.Count == 0 )
+                    {
+                        Response.Write("<script  LANGUAGE='JavaScript'>alert('參數錯誤');location.href='Home.aspx'</script>");
+                    }
+                    else
+                    {
+                        Name.Value = ds.Tables[0].Rows[0]["Name"].ToString();
+                        P_ID.Value = ds.Tables[0].Rows[0]["P_ID"].ToString();
+                        Firstvisit_Date.Value = Dateformat(ds.Tables[0].Rows[0]["Firstvisit_Date"].ToString());
+                        Sex.SelectedValue = ds.Tables[0].Rows[0]["sex"].ToString();
+                        identity.Value = ds.Tables[0].Rows[0]["identity"].ToString();
+                        Born_Date.Value = Dateformat(ds.Tables[0].Rows[0]["Born_Date"].ToString());
+                        Phone1.Value = ds.Tables[0].Rows[0]["Phone1"].ToString();
+                        Phone2.Value = ds.Tables[0].Rows[0]["Phone2"].ToString();
+                        Addr.Value = ds.Tables[0].Rows[0]["addr"].ToString();
+                        Note.Value = ds.Tables[0].Rows[0]["Note"].ToString();
+                    }
                 }
             }
             
@@ -47,17 +50,10 @@ namespace Medical_treatment
         protected void Update_Click(object sender, EventArgs e)
         {
             String cmd = "Update Patient Set ";
-            cmd += "Name='" + Name.Value + "' , Firstvisit_Date='" + Firstvisit_Date.Value +"', Sex = '" +  Sex.SelectedValue + "' , [identity]='" + identity.Value + "' , Born_Date='"+ Born_Date.Value + "' , Phone='"+ Phone .Value + "' , Addr='"+ Addr.Value+ "' , Note='"+Note.Value+"'"; 
+            cmd += "Name='" + Name.Value + "' , Firstvisit_Date='" + Firstvisit_Date.Value +"', Sex = '" +  Sex.SelectedValue + "' , [identity]='" + identity.Value + "' , Born_Date='"+ Born_Date.Value + "' , Phone1='"+ Phone1 .Value + "', Phone2='"+ Phone2 .Value + "' , Addr='"+ Addr.Value+ "' , Note='"+Note.Value+"'"; 
             cmd += " Where P_ID = '"+ P_ID.Value +"'";
-            if (data.execsql(cmd))
-            {
-                Response.Write("<script  LANGUAGE='JavaScript'>alert('修改成功');location.href='Home.aspx'</script>");
-            }
-            {
-                Response.Write("<script  LANGUAGE='JavaScript'>alert('修改失敗');</script>");
-            }
-            /*data.inserData(cmd);
-            Response.Redirect("Home.aspx");*/
+            if (data.execsql(cmd))    Response.Write("<script  LANGUAGE='JavaScript'>alert('修改成功');location.href='Home.aspx'</script>");
+            else Response.Write("<script  LANGUAGE='JavaScript'>alert('修改失敗');</script>");
         }
 
         protected void Cancel_Click(object sender, EventArgs e)

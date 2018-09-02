@@ -11,194 +11,69 @@ namespace Medical_treatment
     public partial class Home : System.Web.UI.Page
     {
         ADOdatNET data = new ADOdatNET();
+        
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
         protected void Serch_Click(object sender, EventArgs e)
-        {
-            //String strcmd = "Select convert(char,departure_date,111) from Patient";
-            
-            String strcmd = "select P_ID, Name, CONVERT(VARCHAR(3), CONVERT(VARCHAR(4), Firstvisit_Date, 20) - 1911) +'/' + SUBSTRING(CONVERT(VARCHAR(10), Firstvisit_Date, 20), 6, 2) + '/' + SUBSTRING(CONVERT(VARCHAR(10), Firstvisit_Date, 20), 9, 2) as Firstvisit_Date , Sex , [identity] ,CONVERT(VARCHAR(3),CONVERT(VARCHAR(4),Born_Date,20) - 1911) + '/' + SUBSTRING(CONVERT(VARCHAR(10),Born_Date,20),6,2) + '/' + SUBSTRING(CONVERT(VARCHAR(10),Born_Date,20),9,2) as Born_Date , Phone , addr , Note from Patient";
-            bool first = true;
-            if (Name.Value != null)
-            {
-                if (first)
-                {
-                    strcmd += " Where ";
-                    first = false;
-                }
-                strcmd += " Name like '%" + Name.Value + "%' ";
-            }
-            if (P_ID.Value != null)
-            {
-                if (first)
-                {
-                    strcmd += " Where ";
-                    first = false;
-                }
-                else
-                {
-                    strcmd += " OR ";
-                }
-                strcmd += " P_ID like '" + P_ID.Value + "'";
-            }
-            if (identity.Value != null)
-            {
-                if (first)
-                {
-                    strcmd += " Where ";
-                    first = false;
-                }
-                else
-                {
-                    strcmd += " OR ";
-                }
-                strcmd += " [identity] like '" + identity.Value + "'";
-            }
-            if (Note.Value != null)
-            {
-                if (first)
-                {
-                    strcmd += " Where ";
-                    first = false;
-                }
-                else
-                {
-                    strcmd += " OR ";
-                }
-                strcmd += " Note like '" + Note.Value + "'";
-            }
-            //String[,] dt = data.Getdata(strcmd);
-            //if (dt == null)
-            //{
-            //    Response.Write("<script>alert('查無此資料');</script>");
-            //}
-            //else
-            //{
-            //    for (int i = 0; i < dt.GetLength(0); i++)
-            //    {
-            //        String P_ID = dt[i, 0];
-            //        String Name = dt[i, 1];
-            //        String Firstvisit_Date = dt[i, 2];
-            //        String Sex = dt[i, 3];
-            //        String Identity = dt[i, 4];
-            //        String Born_Date = dt[i, 5];
-            //        String Phone = dt[i, 6];
-            //        String addr = dt[i, 7];
-            //        String note = dt[i, 8];
-            //    }
-            //}
-
-            //GridView1.DataSource = data.getDataSet(strcmd);
-            //GridView1.DataBind();
+        {   
+            String strcmd = "select P_ID, Name , Sex ,[identity], Phone1 , Phone2 , addr , Note, ";
+            strcmd += "[dbo].[udfTaiwanDateFormat] (Firstvisit_Date,'yy/mm/dd') Firstvisit_Date,[dbo].[udfTaiwanDateFormat] (Born_Date,'yy/mm/dd') Born_Date ";
+            strcmd += "from Patient where 1=2  ";
+            if (Name.Value != "") strcmd += " or Name like '%" + Name.Value + "%' ";
+            if(P_ID.Value != "") strcmd += " or P_ID = '" + P_ID.Value + "'";
+            if (Phone1.Value != "") strcmd += " or Phone1 like '%" + Phone1.Value + "%'";
+            if (Phone2.Value != "") strcmd += " or Phone2 like '%" + Phone2.Value + "%'";
+            if (Addr.Value != "") strcmd += " or Addr like '%" + Addr.Value + "%'";
+            if (identity.Value != "") strcmd += " or [identity] = '" + identity.Value + "' ";
+            if(Note.Value != "") strcmd += " or Note like '" + Note.Value + "'";
+            if (Firstvisit_Date.Value != "") strcmd += " or Firstvisit_Date = '" + data.ToSimpleUSDate(Note.Value) + "'";
+            if (Born_Date.Value != "") strcmd += " or Born_Date = '" + data.ToSimpleUSDate(Born_Date.Value) + "'";
             DataSet dt = data.getDataSet(strcmd);
-
             ListView1.DataSource = dt;
             ListView1.DataBind();
         }
-
-        protected void Clean_Click(object sender, EventArgs e)
-        {
-            Name.Value = "";
-            P_ID.Value = "";
-            identity.Value = "";
-            Firstvisit_Date.Value = "";
-            Born_Date.Value = "";
-            Phone1.Value = "";
-            Phone2.Value = "";
-            Note.Value = "";
-            Addr.Value = "";
-            ListView1.DataSource = null;
-            ListView1.DataBind();
-        }
-
-        protected void Insert_Click(object sender, EventArgs e)
-        {
-            bool iserror = false;
-            String errormes = "<Script>alert('";
-            if(Name.Value=="")
-            {
-                errormes += "姓名未填寫\\n";
-                iserror = true;
-            }
-            if(identity.Value == "")
-            {
-                errormes += "身份證字號未填寫\\n";
-                iserror = true;
-            }
-            if(Born_Date.Value == "")
-            {
-                errormes += "出生年月日未填寫\\n";
-                iserror = true;
-            }
-            if(Phone1.Value == "" || Phone2.Value == "")
-            {
-                errormes += "電話未填寫\\n";
-                iserror = true;
-            }
-            if(Addr.Value == "")
-            {
-                errormes += "地址未填寫\\n";
-                iserror = true;
-            }
-            errormes += "')</Script>";
-            
-            if(iserror)
-            {
-                Response.Write(errormes);
-            }
+        
+        protected void Create(object sender, EventArgs e)
+        {  
+            String cmd = "select * from Patient where [identity]='" + identity.Value + "'";
+            if (data.used(cmd)) Response.Write("<script  LANGUAGE='JavaScript'>alert('已註冊過');</script>");
             else
             {
-                String cmd= "select * from Patient where [identity]='"+ identity.Value + "'";
-                if(data.used(cmd))
-                {
-                    Response.Write("<script  LANGUAGE='JavaScript'>alert('已註冊過');</script>");
-                }
-                else
-                {
-                    String firstDate;
-                    if (Firstvisit_Date.Value == "")
-                    {
-                        firstDate = DateTime.Today.ToShortDateString().ToString();
-                    }
-                    else
-                    {
-                        firstDate = Firstvisit_Date.Value;
-                    }
-                    cmd = "Insert into Patient(Name,Firstvisit_Date,Sex,[identity],Born_Date,Phone,addr,Note) Values('" + Name.Value + "','" + firstDate + "','" + Sex.SelectedValue + "','" + identity.Value + "','" + Born_Date.Value + "','" + Phone1.Value + "','" + Addr.Value + "','" + Note.Value + "')";
-                    if (data.execsql(cmd))
-                    {
-                        Response.Write("<script  LANGUAGE='JavaScript'>alert('新增成功');</script>");
-                    }
-                    {
-                        Response.Write("<script  LANGUAGE='JavaScript'>alert('新增失敗');</script>");
-                    }
-                    ListView1.DataSource = null;
-                    ListView1.DataBind();
-                }
-            }
+                String firstDate;
+                firstDate = DateTime.Today.ToShortDateString().ToString();
+                if (Firstvisit_Date.Value != "") firstDate = data.ToSimpleUSDate(Firstvisit_Date.Value);
+                cmd = "Insert into Patient(P_ID,Name,Firstvisit_Date,Sex,[identity],Born_Date,Phone1,Phone2,addr,Note) ";                
+                cmd += " Values((select ISNULL(max(P_ID)+1,1) from Patient),'" + Name.Value + "',CONVERT(datetime,'" + firstDate + "', 111),'" + Sex.SelectedValue + "','" + identity.Value + "',CONVERT(datetime,'" + data.ToSimpleUSDate(Born_Date.Value) + "', 111),'" + Phone1.Value + "','" + Phone2.Value + "','" + Addr.Value + "','" + Note.Value + "')";
+                if (data.execsql(cmd)) Response.Write("<script  LANGUAGE='JavaScript'>alert('新增成功');</script>");
+                else Response.Write("<script  LANGUAGE='JavaScript'>alert('新增失敗');</script>");
+                ListView1.DataSource = null;
+                ListView1.DataBind();
+            }            
+        }
+        public string Checksex(object obj)
+        {
+            if (obj.ToString() == "0") return "女";
+            else return "男";
         }
 
-        public string checksex(object obj)
+        protected void SearchMedical_redcords(object sender, CommandEventArgs e)
         {
-            string sex = obj.ToString();
-            if(sex=="0")
-            {
-                return "女";
-            }
-            else
-            {
-                return "男";
-            }
+            string[] info = e.CommandArgument.ToString().Split(',');
+            String P_ID = info[0];
+            String Name = info[1];
+            String querystring = "?Patient=" + P_ID + "&Name=" + Name;
+            Response.Redirect("Medical_records.aspx" + querystring);
         }
+
 
         protected void update_Click(object sender, CommandEventArgs e)
         {
             String P_ID = e.CommandArgument.ToString();
-            String ava = "?P_ID="+P_ID;
-            Response.Redirect("EditPatient.aspx"+ava);
+            String ava = "?P_ID=" + P_ID;
+            Response.Redirect("EditPatient.aspx" + ava);
         }
 
         protected void Delete_Command(object sender, CommandEventArgs e)
@@ -211,6 +86,11 @@ namespace Medical_treatment
                 data.execsql(cmd);
                 Response.Redirect("Home.aspx", true);
             }
+        }
+
+        protected void ListView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

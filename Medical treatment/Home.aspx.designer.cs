@@ -103,31 +103,22 @@ namespace Medical_treatment {
         protected global::System.Web.UI.HtmlControls.HtmlInputText Addr;
         
         /// <summary>
-        /// Serch 控制項。
+        /// btn_serch 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Serch;
+        protected global::System.Web.UI.WebControls.Button btn_serch;
         
         /// <summary>
-        /// Clean 控制項。
+        /// btn_insert 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Clean;
-        
-        /// <summary>
-        /// Insert 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Insert;
+        protected global::System.Web.UI.WebControls.Button btn_insert;
         
         /// <summary>
         /// ListView1 控制項。

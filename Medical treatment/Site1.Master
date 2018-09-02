@@ -8,42 +8,37 @@
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">--%>
-    <link rel="stylesheet" href="Content/bootstrap.min.css" />
-    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
-    <script src="Scripts/jquery-3.0.0.min.js"></script>
-    <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>--%>
-    <script src="Scripts/popper.min.js"></script>
-    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>--%>
-    <script src="Scripts/bootstrap.min.js"></script>
+    <link href="Content/bootstrap-4.1.0.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap-datepicker3.min.css" rel="stylesheet" />  
+    <link href="Content/bootstrap3.3.7-glyphicon.css" rel="stylesheet" />
+    <link href="Content/jquery-ui.css" rel="stylesheet" />
+    <link href="Content/sweetalert.css" rel="stylesheet" />
+    <link href="Content/query.dataTables.min.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script src="Scripts/bootstrap-4.1.0.min.js"></script>
+    <script src="Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="Scripts/locales/bootstrap-datepicker.zh-TW.min.js"></script>
+    <script src="Scripts/jquery-ui.min.js"></script>
+    <script src="Scripts/sweetalert.js"></script>
+    <script src="Scripts/jquery.dataTables.min.js"></script>
 </head>
+<script src="Scripts/sweetalert.js"></script>
 <body>
-    <form id="form1" runat="server">
-
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">資料增修
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                            <a class="dropdown-item" href="#">病歷資料</a>
-                            <a class="dropdown-item" href="#">傷名資料</a>
-                            <a class="dropdown-item" href="#">藥物資料</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">關閉</a>
-                        </div>
+                    <li class="nav-item dropdown">                           
+                        <a class="nav-link" href="home.aspx" role="button" aria-haspopup="true">病患查詢</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">資料查詢
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">資料查詢
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                            <a class="dropdown-item" href="#">郵寄藥物查詢</a>
-                            <a class="dropdown-item" href="#">病歷資料查詢</a>
+                            <a class="dropdown-item" href="query_drug.aspx">郵寄藥物查詢</a>
+                            <a class="dropdown-item" href="query_case.aspx">病歷資料查詢</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -56,16 +51,13 @@
                     </li>
                 </ul>
             </div>
-
-
         </nav>
-
-
-
-        <div>
+    <form id="form1" runat="server">
+        <div class="container">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
     </form>
+    <br />
 </body>
 </html>

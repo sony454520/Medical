@@ -22,15 +22,6 @@ namespace Medical_treatment {
         protected global::System.Web.UI.HtmlControls.HtmlInputText Name;
         
         /// <summary>
-        /// RFVNAME 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RFVNAME;
-        
-        /// <summary>
         /// P_ID 控制項。
         /// </summary>
         /// <remarks>
@@ -47,15 +38,6 @@ namespace Medical_treatment {
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText identity;
-        
-        /// <summary>
-        /// RFVID 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RFVID;
         
         /// <summary>
         /// Firstvisit_Date 控制項。
@@ -76,15 +58,6 @@ namespace Medical_treatment {
         protected global::System.Web.UI.HtmlControls.HtmlInputText Born_Date;
         
         /// <summary>
-        /// RFVBD 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RFVBD;
-        
-        /// <summary>
         /// Sex 控制項。
         /// </summary>
         /// <remarks>
@@ -94,13 +67,22 @@ namespace Medical_treatment {
         protected global::System.Web.UI.WebControls.RadioButtonList Sex;
         
         /// <summary>
-        /// Phone 控制項。
+        /// Phone1 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Phone;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText Phone1;
+        
+        /// <summary>
+        /// Phone2 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText Phone2;
         
         /// <summary>
         /// Note 控制項。
@@ -121,30 +103,21 @@ namespace Medical_treatment {
         protected global::System.Web.UI.HtmlControls.HtmlInputText Addr;
         
         /// <summary>
-        /// RFVAddr 控制項。
+        /// btn_serch 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RFVAddr;
+        protected global::System.Web.UI.WebControls.Button btn_serch;
         
         /// <summary>
-        /// Update 控制項。
+        /// btn_insert 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Update;
-        
-        /// <summary>
-        /// Cancel 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Cancel;
+        protected global::System.Web.UI.WebControls.Button btn_insert;
     }
 }

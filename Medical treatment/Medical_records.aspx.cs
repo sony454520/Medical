@@ -39,7 +39,7 @@ namespace Medical_treatment
         {
             // dataconect.ToSimpleUSDate(Firstvisit_Date.Value);
             String cmd = "Insert into Medical_records(PH_ID,HDate,Wound,medicine,cost,Owed,P_ID,Prove_Date,Receipt_Date) ";
-            cmd += " Values((select ISNULL(max(PH_ID)+1,1) from Medical_records),CONVERT(datetime,'" + dataconect.ToSimpleUSDate(Hdate.Value) + "', 111),'" + Wound.Value + "','" + medicine.Value + "','" + cost.Value + "','" + Owed.Value +"','" + Patient + "',CONVERT(datetime,'" + dataconect.ToSimpleUSDate(Prove_Date.Value) + "', 111),CONVERT(datetime,'" + dataconect.ToSimpleUSDate(Receipt_Date.Value) + "', 111))";
+            cmd += " Values((select ISNULL(max(PH_ID)+1,1) from Medical_records),CONVERT(datetime,'" + dataconect.ToSimpleUSDate(Hdate.Value) + "', 111),'" + Wound.Value + "','" + medicine.Value + "','" + cost.Value + "','" + Owed.Value +"','" + Patient + "',null,null)";
             if (dataconect.execsql(cmd)) Response.Write("<script  LANGUAGE='JavaScript'>alert('新增成功');</script>");
             else Response.Write("<script  LANGUAGE='JavaScript'>alert('新增失敗');</script>");
             Update_ListView1();
@@ -47,16 +47,28 @@ namespace Medical_treatment
 
         protected void btn_Update_Click(object sender, EventArgs e)
         {
-            String cmd = "update Medical_records set HDate = CONVERT(datetime,'" + dataconect.ToSimpleUSDate(Hdate.Value) + "', 111)," +
-                "Wound = '" + Wound.Value + "',"+
+            String cmd = "update Medical_records set HDate =  '" + dataconect.ToSimpleUSDate(Hdate.Value) + "'," +
+                "Wound = '" + Wound.Value + "'," +
                 "medicine = '" + medicine.Value + "'," +
                 "cost = '" + cost.Value + "'," +
                 "Owed = '" + Owed.Value + "'," +
-                "Prove_Date  = CONVERT(datetime,'" + dataconect.ToSimpleUSDate(Prove_Date.Value) + "', 111)," +
-                "Receipt_Date  = CONVERT(datetime,'" + dataconect.ToSimpleUSDate(Receipt_Date.Value) + "', 111)" +
-                "where PH_ID = " + PH_ID.Value;
+                //"Prove_Date  = CONVERT(datetime,'" + dataconect.ToSimpleUSDate(Prove_Date.Value) + "', 111)," +
+                //"Receipt_Date  = CONVERT(datetime,'" + dataconect.ToSimpleUSDate(Receipt_Date.Value) + "', 111)" +
+                "Prove_Date  = NULL," +
+                "Receipt_Date  = NULL,";
+            cmd = cmd.Substring(0, cmd.Length - 1);
+               cmd+= " where PH_ID = " + PH_ID.Value;
             if (dataconect.execsql(cmd)) Response.Write("<script  LANGUAGE='JavaScript'>alert('更新成功');</script>");
             else Response.Write("<script  LANGUAGE='JavaScript'>alert('新增失敗');</script>");
+            Update_ListView1();
+        }
+
+        protected void btn_Delete_Click(object sender, EventArgs e)
+        {
+            String cmd = "Delete from Medical_records";
+            cmd += " where PH_ID = " + PH_ID.Value;
+            if (dataconect.execsql(cmd)) Response.Write("<script  LANGUAGE='JavaScript'>alert('刪除成功');</script>");
+            else Response.Write("<script  LANGUAGE='JavaScript'>alert('刪除失敗');</script>");
             Update_ListView1();
         }
     }

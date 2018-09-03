@@ -24,8 +24,8 @@ namespace Medical_treatment
             strcmd += "from Patient where 1=2  ";
             if (Name.Value != "") strcmd += " or Name like '%" + Name.Value + "%' ";
             if(P_ID.Value != "") strcmd += " or P_ID = '" + P_ID.Value + "'";
-            if (Phone1.Value != "") strcmd += " or Phone1 like '%" + Phone1.Value + "%'";
-            if (Phone2.Value != "") strcmd += " or Phone2 like '%" + Phone2.Value + "%'";
+            if (Phone1.Value != "") strcmd += " or Phone1 like '%" + Phone1.Value + "%'" + " or Phone2 like '%" + Phone1.Value + "%'";
+            if (Phone2.Value != "") strcmd += " or Phone1 like '%" + Phone2.Value + "%'" + " or Phone2 like '%" + Phone2.Value + "%'";
             if (Addr.Value != "") strcmd += " or Addr like '%" + Addr.Value + "%'";
             if (identity.Value != "") strcmd += " or [identity] = '" + identity.Value + "' ";
             if(Note.Value != "") strcmd += " or Note like '" + Note.Value + "'";
@@ -80,7 +80,7 @@ namespace Medical_treatment
         {
             String P_ID = e.CommandArgument.ToString();
             string confirmValue = Request.Form["confirm_value"];
-            if (confirmValue == "是")
+            //if (confirmValue == "是")
             {
                 string cmd = "delete Patient where P_ID='" + P_ID + "'";
                 data.execsql(cmd);

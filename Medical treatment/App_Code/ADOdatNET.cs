@@ -71,7 +71,18 @@ namespace Medical_treatment
             if ( dtx != "" )
             {
                 DateTime my_date = DateTime.Parse(dtx);
-                return string.Format("{0}/{1}/{2}", (Int32.Parse(my_date.Year.ToString()) + 1911), my_date.Month, my_date.Day);
+                string [] datearray = dtx.Split('/');
+                if (datearray[0].Length==2)
+                {
+
+                    return string.Format("{0}/{1}/{2}", my_date.Year+11, my_date.Month, my_date.Day);
+                }
+                else
+                {
+                    return string.Format("{0}/{1}/{2}", (Int32.Parse(my_date.Year.ToString()) + 1911), my_date.Month, my_date.Day);
+                }
+
+                //return string.Format("{0}/{1}/{2}", my_date.Year , my_date.Month, my_date.Day);
             }
             return "";
             

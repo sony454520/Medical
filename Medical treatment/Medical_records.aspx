@@ -159,7 +159,7 @@
                 </button>
             </div>
             <div class="col-2">
-                <asp:Button ID="btn_Delete" runat="server" CssClass="btn btn-danger btn_updated" Text="刪除" OnClientClick="showinfo()" />
+                <asp:Button ID="btn_Delete" runat="server" CssClass="btn btn-danger btn_updated" Text="刪除" OnClientClick="btn_Delete_Click" OnClick="btn_Delete_Click"  />
             </div>
             <div class="col-2">
                 <asp:Button ID="btn_Update" runat="server" CssClass="btn btn-primary btn_updated" Text="修改" OnClientClick="btn_Update_Click" OnClick="btn_Update_Click" />
@@ -169,8 +169,7 @@
             </div>
             <div class="col-2"> 
                 <button id="btn_clear" type="button" class="btn btn-success">
-                  <span class="glyphicon glyphicon-repeat"></span> 清除
-                </button>
+                  <span class="glyphicon glyphicon-repeat"></span> 清除</button>
             </div>
         </div>
     </div>

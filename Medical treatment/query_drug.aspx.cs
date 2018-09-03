@@ -13,5 +13,9 @@ namespace Medical_treatment
         {
 
         }
+        protected void Serch_Click(object sender, EventArgs e)
+        {
+            string cmd = "select * from Mail_Record ";
+        }
     }
 }

@@ -16,8 +16,23 @@ namespace Medical_treatment
         {
             string P_ID = Request.QueryString["P_ID"];
             string PH_ID = Request.QueryString["PH_ID"];
+            string Mail_ID = Request.QueryString["M_ID"];
             string query;
-            if (PH_ID != null)
+            if(Mail_ID != null)
+            {
+                query = string.Format("select * from Mail_Record where M_ID = '{0}'", Mail_ID);
+                DataSet Mailinfo = dataconect.getDataSet(query);
+                M_ID.Value = Mail_ID;
+                Send_Date.Value = Mailinfo.Tables[0].Rows[0]["Send_Date"].ToString();
+                recipient.Value = Mailinfo.Tables[0].Rows[0]["recipient"].ToString();
+                medicine.Value = Mailinfo.Tables[0].Rows[0]["Medicine"].ToString();
+                cost.Value = Mailinfo.Tables[0].Rows[0]["Cost"].ToString();
+                Owed.Value = Mailinfo.Tables[0].Rows[0]["Owed"].ToString();
+                Zipcode.Value = Mailinfo.Tables[0].Rows[0]["Zipcode"].ToString();
+                Addr.Value= Mailinfo.Tables[0].Rows[0]["Addr"].ToString();
+
+            }
+            else if (PH_ID != null)
             {
                 query = string.Format("select * from Medical_records where PH_ID = '{0}'", PH_ID);
                 DataSet Medical_recordInfo = dataconect.getDataSet(query);

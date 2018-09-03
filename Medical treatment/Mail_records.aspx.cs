@@ -11,36 +11,49 @@ namespace Medical_treatment
     public partial class Mail_records : System.Web.UI.Page
     {
         ADOdatNET dataconect = new ADOdatNET();
-        string Patient, PatientName;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Patient = Request.QueryString["Patient"];
-            PatientName = Request.QueryString["Name"];
-            FullName.Text = PatientName;
-            if (!IsPostBack)
+            string P_ID = Request.QueryString["P_ID"];
+            string PH_ID = Request.QueryString["PH_ID"];
+            string query;
+            if (PH_ID != null)
             {
-                Update_ListView1();
+                query = string.Format("select * from Medical_records where PH_ID = '{0}'", PH_ID);
+                DataSet Medical_recordInfo = dataconect.getDataSet(query);
+                medicine.Value = Medical_recordInfo.Tables[0].Rows[0]["medicine"].ToString();
+                cost.Value = Medical_recordInfo.Tables[0].Rows[0]["cost"].ToString();
+                Owed.Value = Medical_recordInfo.Tables[0].Rows[0]["Owed"].ToString();
+                query = string.Format("select * from Patient where P_ID = '{0}'", Medical_recordInfo.Tables[0].Rows[0]["P_ID"]);
+
+                DataSet PatientInfo = dataconect.getDataSet(query);
+                Addr.Value = PatientInfo.Tables[0].Rows[0]["addr"].ToString();
+                recipient.Value = PatientInfo.Tables[0].Rows[0]["Name"].ToString();
+                FullName.Text = PatientInfo.Tables[0].Rows[0]["Name"].ToString();
+
+                query = string.Format("select * from Mail_Record where recipient = '{0}'", PatientInfo.Tables[0].Rows[0]["Name"]);
+                ListView1.DataSource = dataconect.getDataSet(query);
+                ListView1.DataBind();
+            }
+            else if (P_ID != null)
+            {
+                query = string.Format("select * from Patient where P_ID = {0}", P_ID);
+                DataSet PatientInfo = dataconect.getDataSet(query);
+                Addr.Value = PatientInfo.Tables[0].Rows[0]["addr"].ToString();
+                recipient.Value = PatientInfo.Tables[0].Rows[0]["Name"].ToString();
+                FullName.Text = PatientInfo.Tables[0].Rows[0]["Name"].ToString();
             }
 
         }
 
         protected void Update_ListView1()
         {
-            string query = "Select PH_ID,[dbo].[udfTaiwanDateFormat] (Hdate,'yy/mm/dd') Hdate,Hdate seq,Wound,medicine,cost,Owed,P_ID," +
-                              "[dbo].[udfTaiwanDateFormat] (Prove_Date,'yy/mm/dd') Prove_Date, [dbo].[udfTaiwanDateFormat] (Receipt_Date,'yy/mm/dd') Receipt_Date " +
-                              "from Medical_records " +
-                              "where P_ID = '" + Patient + "' order by seq desc";
-            DataSet data = dataconect.getDataSet(query);
-            ListView1.DataSource = data;
-            ListView1.DataBind();
         }
 
         protected void btn_Insert_Click(object sender, EventArgs e)
         {
-            // dataconect.ToSimpleUSDate(Firstvisit_Date.Value);
-            String cmd = "Insert into Medical_records(PH_ID,HDate,Wound,medicine,cost,Owed,P_ID,Prove_Date,Receipt_Date) ";
-            cmd += " Values((select ISNULL(max(PH_ID)+1,1) from Medical_records),CONVERT(datetime,'" + dataconect.ToSimpleUSDate(Hdate.Value) + "', 111),'" + Wound.Value + "','" + medicine.Value + "','" + cost.Value + "','" + Owed.Value + "','" + Patient + "',CONVERT(datetime,'" + dataconect.ToSimpleUSDate(Prove_Date.Value) + "', 111),CONVERT(datetime,'" + dataconect.ToSimpleUSDate(Receipt_Date.Value) + "', 111))";
+            string cmd = "insert into Mail_Record(M_ID,Send_Date,recipient,Medicine,Cost,Owed,Zipcode,Addr)";
+            cmd += string.Format("Values ((select ISNULL(max(PH_ID) + 1, 1) from Medical_records),{0},{1},{2},{3},{4},{5},{6})", dataconect.ToSimpleUSDate(Send_Date.Value), recipient.Value, medicine.Value, cost.Value, Owed.Value, Zipcode.Value, Addr.Value);
             if (dataconect.execsql(cmd)) Response.Write("<script  LANGUAGE='JavaScript'>alert('新增成功');</script>");
             else Response.Write("<script  LANGUAGE='JavaScript'>alert('新增失敗');</script>");
             Update_ListView1();
@@ -48,16 +61,19 @@ namespace Medical_treatment
 
         protected void btn_Update_Click(object sender, EventArgs e)
         {
-            String cmd = "update Medical_records set HDate = CONVERT(datetime,'" + dataconect.ToSimpleUSDate(Hdate.Value) + "', 111)," +
-                "Wound = '" + Wound.Value + "'," +
-                "medicine = '" + medicine.Value + "'," +
-                "cost = '" + cost.Value + "'," +
-                "Owed = '" + Owed.Value + "'," +
-                "Prove_Date  = CONVERT(datetime,'" + dataconect.ToSimpleUSDate(Prove_Date.Value) + "', 111)," +
-                "Receipt_Date  = CONVERT(datetime,'" + dataconect.ToSimpleUSDate(Receipt_Date.Value) + "', 111)" +
-                "where PH_ID = " + PH_ID.Value;
+            string cmd = "Update Mail_Record ";
+            cmd += string.Format(" Set Send_Date='{0}' ,recipient = '{1}' , Medicine = '{2}' , Cost = '{3}' , Owed = '{4}' ,Zipcode = '{5}', Addr= '{6}' ", dataconect.ToSimpleUSDate(Send_Date.Value), recipient.Value, medicine.Value,cost.Value,Owed.Value,Zipcode.Value,Addr.Value);
+            cmd += string.Format(" where M_ID = {0} ", M_ID.Value);
             if (dataconect.execsql(cmd)) Response.Write("<script  LANGUAGE='JavaScript'>alert('更新成功');</script>");
-            else Response.Write("<script  LANGUAGE='JavaScript'>alert('新增失敗');</script>");
+            else Response.Write("<script  LANGUAGE='JavaScript'>alert('更新失敗');</script>");
+            Update_ListView1();
+        }
+        protected void btn_Delete_Click(object sender, EventArgs e)
+        {
+            String cmd = "Delete from Mail_Record";
+            cmd += " where M_ID = " + M_ID.Value;
+            if (dataconect.execsql(cmd)) Response.Write("<script  LANGUAGE='JavaScript'>alert('刪除成功');</script>");
+            else Response.Write("<script  LANGUAGE='JavaScript'>alert('刪除失敗');</script>");
             Update_ListView1();
         }
 

@@ -23,8 +23,8 @@ namespace Medical_treatment
                 Age.Text = data.Tables[0].Rows[0]["age"].ToString();
                 Addr.Text = data.Tables[0].Rows[0]["addr"].ToString();
                 Hurt.Text = data.Tables[0].Rows[0]["Wound"].ToString();
-                HDate.Text = data.Tables[0].Rows[0]["hdateYear"].ToString()+ data.Tables[0].Rows[0]["hdateMonth"].ToString()+ data.Tables[0].Rows[0]["hdateDate"].ToString();
-                HDate_1.Text = data.Tables[0].Rows[0]["hdateYear"].ToString() + data.Tables[0].Rows[0]["hdateMonth"].ToString() + data.Tables[0].Rows[0]["hdateDate"].ToString();
+                HDate.Text = data.Tables[0].Rows[0]["hdateYear"].ToString()+"/"+ data.Tables[0].Rows[0]["hdateMonth"].ToString()+"/" + data.Tables[0].Rows[0]["hdateDate"].ToString();
+                HDate_1.Text = data.Tables[0].Rows[0]["hdateYear"].ToString() + "/" + data.Tables[0].Rows[0]["hdateMonth"].ToString() + "/" + data.Tables[0].Rows[0]["hdateDate"].ToString();
                 identity.Text = data.Tables[0].Rows[0]["identity"].ToString();
             }
         }

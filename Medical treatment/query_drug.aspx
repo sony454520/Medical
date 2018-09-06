@@ -59,7 +59,7 @@
         <tr>
             <th>收件人：</th>
             <td><input type="text" class="form-control form-control-sm" id="Name" placeholder="姓名" runat="server" /></td>
-            
+            <td colspan="2"><input id="hasmoney" type="checkbox" value="Y" runat="server" /><label for="hasmoney">只顯示欠款</label></td>
         </tr>
      </table>
     <div class="row mb-2">

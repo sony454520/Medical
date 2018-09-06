@@ -10,7 +10,7 @@ namespace Medical_treatment
 {
     internal class ADOdatNET
     {
-        
+
         public ADOdatNET()
         {
 
@@ -24,15 +24,22 @@ namespace Medical_treatment
             query += string.Format(" Set Receipt_Date = {0} ", DateTime.Parse(Date).ToShortDateString());
             query += string.Format(" where PH_ID = '{0}' ", PH_ID);
         }
-        public void RecordProveDate(string Date,string PH_ID)//更新證明日期
-        {            
+        public void RecordProveDate(string Date, string PH_ID)//更新證明日期
+        {
             string query = "Update Medical_records";
             query += string.Format(" Set Prove_Date = {0} ", DateTime.Parse(Date).ToShortDateString());
             query += string.Format(" where PH_ID = '{0}' ", PH_ID);
         }
-        public DataSet QueryMail_records() //查詢郵寄資料
+        public DataSet QueryMail_records(string startday, string endday, string recipient, bool hasmoney) //查詢郵寄資料
         {
-            return new DataSet();
+            string query = "select Datepart(year, Send_Date)-1911 year,Datepart(month, Send_Date) month,Datepart(day, Send_Date) day ,";
+            query += "recipient,Cost,Zipcode,Addr from Mail_Record ";
+            query += " where ";
+            if (startday != "") query += " Send_Date >= CONVERT(datetime,'" + ToSimpleUSDate(startday) + "', 111)";
+            if (endday != "") query += " and Send_Date <= CONVERT(datetime,'" + ToSimpleUSDate(endday) + "', 111)";
+            if (recipient != "") query += string.Format(" and Name like '%{0}%' ", recipient);
+            if (hasmoney) query += " Owed not like '0' ";
+            return getDataSet(query);
         }
 
         public String GetBigNumber(int num ) //數字金額轉大寫
@@ -68,7 +75,7 @@ namespace Medical_treatment
                              "b.addr,a.wound,Datepart(year, a.hdate)-1911 hdateYear,Datepart(month, a.hdate) hdateMonth,Datepart(day, a.hdate) hdateDate,b.[identity] ";
             query += "from Medical_records a,Patient b";
             query += " where a.P_ID = b.P_ID ";
-            query +=  string.Format(" and a.PH_ID = {0}", ph_id);
+            query += string.Format(" and a.PH_ID = {0}", ph_id);
             return getDataSet(query);
         }
 
@@ -92,7 +99,7 @@ namespace Medical_treatment
             if (startday != "") query += " and Hdate >= CONVERT(datetime,'" + ToSimpleUSDate(startday) + "', 111)";
             if (endday != "") query += " and Hdate <= CONVERT(datetime,'" + ToSimpleUSDate(endday) + "', 111)";
             if (name != "") query += string.Format(" and Name like '%{0}%' ", name);
-            if (hasmoney  ) query += " and owed > 0 ";
+            if (hasmoney) query += " and owed > 0 ";
             query += " order by seq desc";
             return getDataSet(query);
         }
@@ -108,14 +115,14 @@ namespace Medical_treatment
 
         public String ToSimpleUSDate(String dtx) //轉西元
         {
-            if ( dtx != "" )
+            if (dtx != "")
             {
                 DateTime my_date = DateTime.Parse(dtx);
-                string [] datearray = dtx.Split('/');
-                if (datearray[0].Length==2)
+                string[] datearray = dtx.Split('/');
+                if (datearray[0].Length == 2)
                 {
 
-                    return string.Format("{0}/{1}/{2}", my_date.Year+11, my_date.Month, my_date.Day);
+                    return string.Format("{0}/{1}/{2}", my_date.Year + 11, my_date.Month, my_date.Day);
                 }
                 else
                 {
@@ -125,7 +132,7 @@ namespace Medical_treatment
                 //return string.Format("{0}/{1}/{2}", my_date.Year , my_date.Month, my_date.Day);
             }
             return "";
-            
+
         }
 
         public DataSet getDataSet(String Strcmd)//取得資料庫資料 DataSet
@@ -212,7 +219,7 @@ namespace Medical_treatment
         }
         public bool used(String Strcmd)
         {
-            if(get_sqlcount(Strcmd)==0)
+            if (get_sqlcount(Strcmd) == 0)
             {
                 return false;
             }
@@ -242,7 +249,7 @@ namespace Medical_treatment
                 conn.Dispose();
             }
         }
-        
+
 
     }
 }

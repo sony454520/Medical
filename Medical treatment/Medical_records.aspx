@@ -56,7 +56,10 @@
                 $(this).val($(this).val().replace("_i", '').replace('.', ''));
             });
             $('#btn_prove').click(function(){
-                window.open("PrintProve.aspx?id="+$('#ContentPlaceHolder1_PH_ID').val(),'列印');
+                window.open("PrintProve.aspx?id="+$('#ContentPlaceHolder1_PH_ID').val(),'列印證明');
+            });
+            $('#btn_receipt').click(function(){
+                window.open("PrintReceipt.aspx?id="+$('#ContentPlaceHolder1_PH_ID').val(),'列印收據');
             });
             //$("#ContentPlaceHolder1_Wound").focus(function () {
                 //var position = $(this).position();
@@ -154,7 +157,7 @@
                 </button>
             </div>
             <div class="col-2">
-                <button type="button" class="btn btn-info btn_updated">
+                <button id="btn_receipt" type="button" class="btn btn-info btn_updated">
                   <span class="glyphicon glyphicon-print"></span> 列印收據
                 </button>
             </div>

@@ -29,7 +29,7 @@ namespace Medical_treatment
             if (Addr.Value != "") strcmd += " or Addr like '%" + Addr.Value + "%'";
             if (identity.Value != "") strcmd += " or [identity] = '" + identity.Value + "' ";
             if(Note.Value != "") strcmd += " or Note like '" + Note.Value + "'";
-            if (Firstvisit_Date.Value != "") strcmd += " or Firstvisit_Date = '" + data.ToSimpleUSDate(Note.Value) + "'";
+            if (Firstvisit_Date.Value != "") strcmd += " or Firstvisit_Date = '" + data.ToSimpleUSDate(Firstvisit_Date.Value) + "'";
             if (Born_Date.Value != "") strcmd += " or Born_Date = '" + data.ToSimpleUSDate(Born_Date.Value) + "'";
             DataSet dt = data.getDataSet(strcmd);
             ListView1.DataSource = dt;
@@ -80,7 +80,7 @@ namespace Medical_treatment
         {
             String P_ID = e.CommandArgument.ToString();
             string confirmValue = Request.Form["confirm_value"];
-            //if (confirmValue == "是")
+            if (confirmValue == "是")
             {
                 string cmd = "delete Patient where P_ID='" + P_ID + "'";
                 data.execsql(cmd);

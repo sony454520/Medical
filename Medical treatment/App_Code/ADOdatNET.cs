@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Configuration;
@@ -14,6 +15,9 @@ namespace Medical_treatment
         {
 
         }
+
+
+
         public void RecordReceipt_Date(string Date, string PH_ID)//更新證明日期
         {
             string query = "Update Medical_records";
@@ -38,11 +42,47 @@ namespace Medical_treatment
             return getDataSet(query);
         }
 
+        public String GetBigNumber(int num ) //數字金額轉大寫
+        {
+            string[] chineseNumber = { "零", "壹", "貳", "參", "肆", "伍", "陸", "柒", "捌", "玖" };
+            string[] unit = { "", "拾", "佰", "仟", "萬", "壹拾萬"};
+            StringBuilder ret = new StringBuilder();
+            string inputNumber = num.ToString();
+            int idx = inputNumber.Length;
+            bool needAppendZero = false;
+            foreach (char c in inputNumber)
+            {
+                idx--;
+                if (c > '0')
+                {
+                    if (needAppendZero)
+                    {
+                        ret.Append(chineseNumber[0]);
+                        needAppendZero = false;
+                    }
+                    ret.Append(chineseNumber[(int)(c - '0')] + unit[idx]);
+                }
+                else
+                    needAppendZero = true;
+            }
+            return ret.Length == 0 ? chineseNumber[0] : ret.ToString();
+        }
+
         public DataSet QueryPrintProve(string ph_id) //列印證明
         {
             string query = "select Datepart(year, a.prove_date)-1911 year,Datepart(month, a.prove_date) month,Datepart(day, a.prove_date) day," +
                              "b.name,(case when b.sex = 0 then '女' else '男' end ) sex , FLOOR(DATEDIFF(DY, b.born_date, GETDATE()) / 365.25) age," +
                              "b.addr,a.wound,Datepart(year, a.hdate)-1911 hdateYear,Datepart(month, a.hdate) hdateMonth,Datepart(day, a.hdate) hdateDate,b.[identity] ";
+            query += "from Medical_records a,Patient b";
+            query += " where a.P_ID = b.P_ID ";
+            query += string.Format(" and a.PH_ID = {0}", ph_id);
+            return getDataSet(query);
+        }
+
+        public DataSet QueryPrintReceipt(string ph_id) //列印收據
+        {
+            string query = "select Datepart(year, a.receipt_date)-1911 year,Datepart(month, a.receipt_date) month,Datepart(day, a.receipt_date) day," +
+                            "b.name,a.cost,Datepart(year, a.hdate) - 1911 hdateYear,Datepart(month, a.hdate) hdateMonth,Datepart(day, a.hdate) hdateDay ";
             query += "from Medical_records a,Patient b";
             query += " where a.P_ID = b.P_ID ";
             query += string.Format(" and a.PH_ID = {0}", ph_id);

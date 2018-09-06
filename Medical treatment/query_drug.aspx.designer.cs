@@ -40,6 +40,15 @@ namespace Medical_treatment {
         protected global::System.Web.UI.HtmlControls.HtmlInputText Name;
         
         /// <summary>
+        /// hasmoney 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox hasmoney;
+        
+        /// <summary>
         /// btn_serch 控制項。
         /// </summary>
         /// <remarks>

@@ -18,7 +18,8 @@ namespace Medical_treatment
         protected void Serch_Click(object sender, EventArgs e)
         {
             DataSet mailinfo = dataconect.QueryMail_records(sDate.Value, eDate.Value, Name.Value, hasmoney.Checked);
-            
+            ListView1.DataSource = mailinfo;
+            ListView1.DataBind();
         }
     }
 }

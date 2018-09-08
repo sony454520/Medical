@@ -54,6 +54,7 @@
         };
         
         //刪除
+        /*
         function Confirm(me) { 
             var confirm_value = document.createElement("INPUT");
             confirm_value.type = "hidden";
@@ -79,8 +80,7 @@
                   );
                   console.log('!!!');
                     confirm_value.value = "!"
-                    document.forms[0].appendChild(confirm_value);
-                     
+                    document.forms[0].appendChild(confirm_value);                     
                  } else {
                      console.log('b');
                 swal("Cancelled", "Your imaginary file is safe :)", "error");
@@ -88,6 +88,19 @@
                 });
             return false;
         };
+        */
+
+        function Confirm() {
+            var confirm_value = document.createElement("INPUT");
+            confirm_value.type = "hidden";
+            confirm_value.name = "confirm_value";
+            if (confirm("是否確定刪除資料?")) {
+                confirm_value.value = "是";
+            } else {
+                confirm_value.value = "否";
+            }
+            document.forms[0].appendChild(confirm_value);
+        }
     </script>
     <h3>病患資料查詢</h3>
     <table class="table">
@@ -189,12 +202,9 @@
                         <asp:LinkButton  ID="update" runat="server" CssClass="btn btn-secondary btn-sm" CommandArgument='<%# Eval("P_ID") %>' OnCommand="update_Click" Text="修改" >
                             <span aria-hidden="true" class="glyphicon glyphicon-edit"></span>
                         </asp:LinkButton>   
-                        <a onclick="Confirm(this);" class="btn btn-danger btn-sm" >
-                            <span aria-hidden="true" style="color:#ffffff" class="glyphicon glyphicon-remove"></span>
-                        </a>
-                        <asp:LinkButton   ID="Delete" runat="server" CssClass="btn btn-danger btn-sm" CommandArgument='<%# Eval("P_ID") %>' OnClientClick="//return Confirm(this);"  OnCommand="Delete_Command" >
+                        <asp:LinkButton ID="Delete" runat="server" CssClass="btn btn-danger btn-sm" CommandArgument='<%# Eval("P_ID") %>' OnClientClick="Confirm()"  OnCommand="Delete_Command" >
                             <span aria-hidden="true" class="glyphicon glyphicon-remove"></span>
-                        </asp:LinkButton>                        
+                        </asp:LinkButton>    
                     </td>
                 </tr>
             </ItemTemplate>

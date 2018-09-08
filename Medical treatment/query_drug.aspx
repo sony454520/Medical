@@ -70,4 +70,41 @@
             <input type="button" id="btn_clean" class="btn btn-warning" value="清除"  />
         </div>
     </div>
+    <div id="show_data" >
+        <asp:ListView ID="ListView1" runat="server">
+         <LayoutTemplate>
+            <table id="my_table"class="table table-striped table-bordered" style="width:100%">
+              <thead>
+                <th runat="server">查看</th>
+                <th runat="server">郵寄<br />日期</th>
+                <th runat="server">處方</th>
+                <th runat="server">處置<br />金額</th>
+                <th runat="server">欠款<br />金額</th>
+                <th runat="server">收件人</th>
+                <th runat="server">郵遞<br />區號</th>
+                <th runat="server">地址</th>
+            </thead>
+            <tbody>
+                <asp:PlaceHolder runat="server" ID="itemPlaceholder" />
+             </tbody>
+         </table>
+        </LayoutTemplate>
+            <ItemTemplate>
+                <tr>
+                    <td>
+                       <a href="Mail_records.aspx?M_ID=Eval('m_id')" target="_blank" >
+                          <span class="glyphicon glyphicon-search"></span>
+                        </a>
+                    </td>
+                    <td class="text-center"><asp:Label runat="server" CssClass="Hdate" Text='<%# Eval("Send_Date") %>'/></td>
+                    <td><asp:Label runat="server" CssClass="medicine" Text='<%# Eval("Medicine") %>' /></td>
+                    <td><asp:Label runat="server" CssClass="cost" Text='<%# Eval("cost") %>' /></td>
+                    <td><asp:Label runat="server" CssClass="Owed" Text='<%# Eval("Owed") %>' /></td>
+                    <td><asp:Label runat="server" CssClass="Receipt_Date" Text='<%# Eval("recipient") %>' /></td>
+                    <td><asp:Label runat="server" CssClass="Receipt_Date" Text='<%# Eval("Zipcode") %>' /></td>
+                    <td><asp:Label runat="server" CssClass="Receipt_Date" Text='<%# Eval("Addr") %>' /></td>
+                </tr>
+            </ItemTemplate>
+        </asp:ListView>    
+    </div>
 </asp:Content>

@@ -32,8 +32,8 @@ namespace Medical_treatment
         }
         public DataSet QueryMail_records(string startday, string endday, string recipient, bool hasmoney) //查詢郵寄資料
         {
-            string query = "select Datepart(year, Send_Date)-1911 year,Datepart(month, Send_Date) month,Datepart(day, Send_Date) day ,";
-            query += "recipient,Cost,Zipcode,Addr from Mail_Record ";
+            string query = "select  [dbo].[udfTaiwanDateFormat] (Send_Date,'yy/mm/dd') Send_Date, Datepart(year, Send_Date)-1911 year,Datepart(month, Send_Date) month,Datepart(day, Send_Date) day ,";
+            query += "recipient,Cost,Zipcode,Addr,Medicine,Owed,m_id  from Mail_Record ";
             query += " where ";
             if (startday != "") query += " Send_Date >= CONVERT(datetime,'" + ToSimpleUSDate(startday) + "', 111)";
             if (endday != "") query += " and Send_Date <= CONVERT(datetime,'" + ToSimpleUSDate(endday) + "', 111)";

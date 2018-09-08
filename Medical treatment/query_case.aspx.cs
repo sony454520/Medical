@@ -18,7 +18,7 @@ namespace Medical_treatment
 
         protected void Serch_Click(object sender, EventArgs e)
         {
-            DataSet data = ADOdata.QueryMail_records(sDate.Value,eDate.Value,Name.Value,hasmoney.Checked);
+            DataSet data = ADOdata.QueryMedical_records(sDate.Value,eDate.Value,Name.Value,hasmoney.Checked);
             ListView1.DataSource = data;
             ListView1.DataBind();
         }

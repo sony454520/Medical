@@ -46,7 +46,9 @@
                 };
             });
         });    
-
+        $(document).on('click', '.print_prove', function () {
+            window.open("PrintProve.aspx?id="+$(this).data('id'),'列印證明');
+        })
     </script>
     <h3>病歷資料查詢</h3>
     <table class="table">
@@ -96,7 +98,7 @@
             <ItemTemplate>
                 <tr>
                     <td>
-                        <div data-id="<%# Eval("PH_ID")%> %>" class="btn btn-info btn_updated print_prove">
+                        <div data-id="<%# Eval("PH_ID")%>" class="btn btn-info btn_updated print_prove">
                           <span class="glyphicon glyphicon-print"></span>
                         </div>
                     </td>

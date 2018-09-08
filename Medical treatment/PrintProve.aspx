@@ -5,6 +5,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+     <link href="Content/bootstrap-4.1.0.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap-datepicker3.min.css" rel="stylesheet" />  
+    <link href="Content/bootstrap3.3.7-glyphicon.css" rel="stylesheet" />
+    <link href="Content/jquery-ui.css" rel="stylesheet" />
+    <link href="Content/sweetalert.css" rel="stylesheet" />
+    <link href="Content/query.dataTables.min.css" rel="stylesheet" />    
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script src="Scripts/bootstrap-4.1.0.min.js"></script>
+    <script src="Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="Scripts/locales/bootstrap-datepicker.zh-TW.min.js"></script>
+    <script src="Scripts/jquery-ui.min.js"></script>
+    <script src="Scripts/sweetalert.js"></script>    
+    <script src="Scripts/jquery.dataTables.min.js"></script>
     <title>證明</title>
     <style type="text/css">
         body{
@@ -12,6 +25,50 @@
             font-size:16pt
         }
     </style>
+    <script type="text/javascript">        
+        $(document).ready(function () {
+            swal({ 
+                title: "病例起始日期", 
+                text: "請輸入病例起始日期：",
+                type: "input", 
+                showCancelButton: false, 
+                closeOnConfirm: false, 
+                animation: "slide-from-top", 
+                inputPlaceholder: "起始日期" 
+            },
+            function(inputValue){ 
+                if (inputValue === "" || inputValue === false ) { 
+                    alert("請輸入病例起始日期！");
+                    return false;
+                }
+                swal2();
+                $('#HDate').html(inputValue);
+            });       
+            var str = $('#HDate').html();
+            $('.showSweetAlert [type=text]').val(str);
+            function swal2() {
+                swal({
+                    title: "病例結束日期",
+                    text: "請輸入病例結束日期：",
+                    type: "input",
+                    showCancelButton: false,
+                    closeOnConfirm: false,
+                    animation: "slide-from-top",
+                    inputPlaceholder: "結束日期"
+                },
+                function (inputValue) {
+                    if (inputValue === "" || inputValue === false) {
+                        alert("請輸入病例結束日期！");
+                        return false;
+                    }
+                   $('#HDate_1').html(inputValue);
+                    swal("已修改日期！");
+                });
+                var str = $('#HDate_1').html();
+                $('.showSweetAlert [type=text]').val(str);
+            };
+        });  
+    </script>
 </head>
 <body>
     <br/><br/><br/>
@@ -63,7 +120,7 @@
                         <td>身<br/>分<br/>證<br/>號<br/>碼</td>
                     </tr>
                     <tr>
-                        <td></td>
+                        <td>本說明書僅供保險或請假使用</td>
                         <td>備<br/><br/><br/>註</td>
                     </tr>
                 </table>

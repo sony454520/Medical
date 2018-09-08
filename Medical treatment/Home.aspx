@@ -78,8 +78,9 @@
                      'success'
                   );
                   console.log('!!!');
-                  confirm_value.value = "!"
-                  document.forms[0].appendChild(confirm_value);
+                    confirm_value.value = "!"
+                    document.forms[0].appendChild(confirm_value);
+                     
                  } else {
                      console.log('b');
                 swal("Cancelled", "Your imaginary file is safe :)", "error");

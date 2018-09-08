@@ -26,7 +26,7 @@ namespace Medical_treatment
                 HDate.Text = data.Tables[0].Rows[0]["hdateYear"].ToString()+"/"+ data.Tables[0].Rows[0]["hdateMonth"].ToString()+"/" + data.Tables[0].Rows[0]["hdateDate"].ToString();
                 HDate_1.Text = data.Tables[0].Rows[0]["hdateYear"].ToString() + "/" + data.Tables[0].Rows[0]["hdateMonth"].ToString() + "/" + data.Tables[0].Rows[0]["hdateDate"].ToString();
                 identity.Text = data.Tables[0].Rows[0]["identity"].ToString();
-                ADOdata.RecordReceipt_Date(DateTime.Now.ToString("yyyy/MM/dd"), ID);
+                //if (data.Tables[0].Rows[0]["year"].ToString() != "") ADOdata.RecordReceipt_Date(DateTime.Now.ToString("yyyy/MM/dd"), ID);
             }
         }
     }

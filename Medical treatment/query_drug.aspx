@@ -73,7 +73,7 @@
     <div id="show_data" >
         <asp:ListView ID="ListView1" runat="server">
          <LayoutTemplate>
-            <table id="my_table"class="table table-striped table-bordered" style="width:100%">
+            <table id="my_table" class="table table-striped table-bordered" style="width:100%">
               <thead>
                 <th runat="server">查看</th>
                 <th runat="server">郵寄<br />日期</th>
@@ -92,7 +92,7 @@
             <ItemTemplate>
                 <tr>
                     <td>
-                       <a href="Mail_records.aspx?M_ID=Eval('m_id')" target="_blank" >
+                       <a href="Mail_records.aspx?M_ID=<%# Eval("m_id") %>" target="_blank" >
                           <span class="glyphicon glyphicon-search"></span>
                         </a>
                     </td>

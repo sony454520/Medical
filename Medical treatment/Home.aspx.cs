@@ -63,8 +63,7 @@ namespace Medical_treatment
         {
             string[] info = e.CommandArgument.ToString().Split(',');
             String P_ID = info[0];
-            String Name = info[1];
-            String querystring = "?Patient=" + P_ID + "&Name=" + Name;
+            String querystring = "?Patient=" + P_ID;
             Response.Redirect("Medical_records.aspx" + querystring);
         }
 

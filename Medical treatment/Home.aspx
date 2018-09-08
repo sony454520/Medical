@@ -155,7 +155,7 @@
     <div id="show_data" >   
         <asp:ListView ID="ListView1" runat="server" OnSelectedIndexChanged="ListView1_SelectedIndexChanged">
             <LayoutTemplate>
-                <table id="my_table"class="table table-striped table-bordered" style="width:100%">
+                <table id="my_table" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr class="text-center">
                             <th runat="server">病患<br/>編號</th>
@@ -179,7 +179,7 @@
             <ItemTemplate>
                 <tr>
                     <td class="text-center">
-                        <asp:LinkButton  ID="P_ID"  runat="server" Text='<%# Eval("P_ID") %>' CommandArgument='<%# Eval("P_ID")+","+Eval("Name") %>' OnCommand="SearchMedical_redcords" /></td>
+                        <asp:LinkButton  ID="P_ID"  runat="server" Text='<%# Eval("P_ID") %>' CommandArgument='<%# Eval("P_ID") %>' OnCommand="SearchMedical_redcords" /></td>
                     <td>
                         <asp:Label ID="Name" runat="server" Text='<%# Eval("Name") %>'/></td>
                     <td>

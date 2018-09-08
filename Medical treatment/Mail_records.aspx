@@ -55,6 +55,11 @@
                 window.open("PrintProve.aspx?id=" + $('#ContentPlaceHolder1_PH_ID').val(), '列印');
 
             });
+            $('#btn_clear').click(function () {
+                $('.btn_updated').attr('disabled', true);
+                $('#edit_div input[type=text],input[type=number]').val('');
+                $('.ph_id:checked').prop('checked',false)
+            });
             //$("#ContentPlaceHolder1_Wound").focus(function () {
             //var position = $(this).position();
             //$("#div_Wound").css("top", position.top - $("#div_Wound").height() + "px");

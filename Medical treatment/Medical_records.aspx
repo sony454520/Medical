@@ -61,6 +61,9 @@
             $('#btn_receipt').click(function(){
                 window.open("PrintReceipt.aspx?id="+$('#ContentPlaceHolder1_PH_ID').val(),'列印收據');
             });
+            $('#btn_addmail').click(function(){
+                window.open("Mail_records.aspx?p_id="+$('#ContentPlaceHolder1_P_ID').html(),'列印收據');
+            });
             //$("#ContentPlaceHolder1_Wound").focus(function () {
                 //var position = $(this).position();
                 //$("#div_Wound").css("top", position.top - $("#div_Wound").height() + "px");
@@ -73,7 +76,11 @@
             
         });        
     </script>
-    <h3>病歷資料(<span class="foo"><asp:Label ID="FullName" runat="server"></asp:Label></span>)</h3><br />
+    <h3>病歷資料(<span class="foo"><asp:Label ID="FullName" runat="server"></asp:Label></span>)</h3>
+    <button id="btn_addmail" type="button" class="btn btn-sm btn-info">
+        <span class="glyphicon glyphicon-envelope"></span> 郵寄資料
+    </button>
+    <br />
     <div id="show_data" >
         <asp:ListView ID="ListView1" runat="server">
          <LayoutTemplate>
@@ -114,6 +121,7 @@
     <hr />
     <div style="display:none">
         <input type="text" class="PH_ID" runat="server" id="PH_ID" readonly="readonly" />
+        <asp:Label runat="server" ID="P_ID"   />
     </div>
     <div id="edit_div">
         <div class="row mb-2">

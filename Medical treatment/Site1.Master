@@ -13,16 +13,15 @@
     <link href="Content/bootstrap3.3.7-glyphicon.css" rel="stylesheet" />
     <link href="Content/jquery-ui.css" rel="stylesheet" />
     <link href="Content/sweetalert.css" rel="stylesheet" />
-    <link href="Content/query.dataTables.min.css" rel="stylesheet" />
+    <link href="Content/query.dataTables.min.css" rel="stylesheet" />    
     <script src="Scripts/jquery-3.3.1.min.js"></script>
     <script src="Scripts/bootstrap-4.1.0.min.js"></script>
     <script src="Scripts/bootstrap-datepicker.min.js"></script>
     <script src="Scripts/locales/bootstrap-datepicker.zh-TW.min.js"></script>
     <script src="Scripts/jquery-ui.min.js"></script>
-    <script src="Scripts/sweetalert.js"></script>
+    <script src="Scripts/sweetalert.js"></script>    
     <script src="Scripts/jquery.dataTables.min.js"></script>
 </head>
-<script src="Scripts/sweetalert.js"></script>
 <body>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

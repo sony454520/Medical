@@ -18,10 +18,12 @@ namespace Medical_treatment
             Patient = Request.QueryString["Patient"];
             PatientName = Request.QueryString["Name"];
             FullName.Text = PatientName;
-            if (!IsPostBack)
+            if (Patient == null) Response.Write("<script  LANGUAGE='JavaScript'>alert('參數錯誤');location.href='Home.aspx'</script>");
+            else if (!IsPostBack)
             {
                 Update_ListView1();
             }
+            P_ID.Text = Patient;
         }
 
         protected void Update_ListView1()

@@ -18,10 +18,10 @@ namespace Medical_treatment
 
 
 
-        public void RecordReceipt_Date(string Date, string PH_ID)//更新證明日期
+        public void RecordReceipt_Date(string Date, string PH_ID)//更新收據日期
         {
             string query = "Update Medical_records";
-            query += string.Format(" Set Receipt_Date = {0} ", DateTime.Parse(Date).ToShortDateString());
+            query += string.Format(" Set Receipt_Date = CONVERT(datetime,'{0}',111) ", DateTime.Parse(Date).ToShortDateString());
             query += string.Format(" where PH_ID = '{0}' ", PH_ID);
         }
         public void RecordProveDate(string Date, string PH_ID)//更新證明日期
@@ -39,6 +39,7 @@ namespace Medical_treatment
             if (endday != "") query += " and Send_Date <= CONVERT(datetime,'" + ToSimpleUSDate(endday) + "', 111)";
             if (recipient != "") query += string.Format(" and Name like '%{0}%' ", recipient);
             if (hasmoney) query += " Owed not like '0' ";
+            query += " order by Send_Date ";
             return getDataSet(query);
         }
 

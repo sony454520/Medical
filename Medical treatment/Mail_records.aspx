@@ -5,6 +5,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <script type="text/javascript">
         $(document).ready(function () {
+            if ($('#ContentPlaceHolder1_M_TYPE').val() == "M_ID") {
+                $('#ContentPlaceHolder1_bnt_new').hide();
+                $('#btn_clear').hide();
+            } else {
+                 $('.btn_updated').attr('disabled', true);
+            }
             $('#div_Wound').hide();
             $("#div_Wound").css("width", $("#ContentPlaceHolder1_Wound").width() + "px");
             $(".datepicker").datepicker({ //DatePicker
@@ -37,29 +43,31 @@
                     { className: "text-left", "targets": [2, 3] }
                 ]
             });
-            $('.btn_updated').attr('disabled', true);
-            $(document).on('click', '.ph_id', function () {
-                $(".ph_id").prop('checked', false);
+           
+            $(document).on('click', '.m_id', function () {
+                console.log('!!');
+                $(".m_id").prop('checked', false);
                 $(this).prop("checked", true)
                 $(this).parent().nextAll().each(function () {
                     $('input.' + $(this).find('span').attr('class')).val($(this).find('span').html());
                 });
-                $('.PH_ID').val($(this).val());
-                $('.btn_updated').attr('disabled', false);
+                $('#ContentPlaceHolder1_M_ID').val($(this).val());
+                if ($('#ContentPlaceHolder1_M_TYPE').val() == "P_ID") {
+                    $('.btn_updated').attr('disabled', false);
+                }
                 //$('input.'+$(this).attr('class')).val($)
             });
             $("input[type='number']").keyup(function () {
                 $(this).val($(this).val().replace("_i", '').replace('.', ''));
             });
-            $('#btn_prove').click(function () {
-                window.open("PrintProve.aspx?id=" + $('#ContentPlaceHolder1_PH_ID').val(), '列印');
-
-            });
             $('#btn_clear').click(function () {
                 $('.btn_updated').attr('disabled', true);
                 $('#edit_div input[type=text],input[type=number]').val('');
-                $('.ph_id:checked').prop('checked',false)
+                $('.m_id:checked').prop('checked',false)
             });
+            if ($('#ContentPlaceHolder1_M_ID').val() != "") {
+                $('.m_id[value='+$('#ContentPlaceHolder1_M_ID').val() +']').click();
+            }
             //$("#ContentPlaceHolder1_Wound").focus(function () {
             //var position = $(this).position();
             //$("#div_Wound").css("top", position.top - $("#div_Wound").height() + "px");
@@ -73,7 +81,6 @@
         });
     </script>
     <h3>郵寄資料(<span class="foo"><asp:Label ID="FullName" runat="server"></asp:Label></span>)</h3>
-    <br />
     <div id="show_data">
         <asp:ListView ID="ListView1" runat="server">
             <LayoutTemplate>
@@ -103,10 +110,10 @@
             <ItemTemplate>
                 <tr>
                     <td>
-                        <input type="checkbox" class="M_ID" value='<%# Eval("M_ID") %>'>
+                        <input type="checkbox" class="m_id" value='<%# Eval("M_ID") %>'>
                     </td>
                     <td class="text-center">
-                        <asp:Label runat="server" CssClass="" Text='<%# Eval("Send_Date") %>' /></td>
+                        <asp:Label runat="server" CssClass="Send_Date" Text='<%# Eval("Send_Date") %>' /></td>
                     <td>
                         <asp:Label runat="server" CssClass="Medicine" Text='<%# Eval("Medicine") %>' /></td>
                     <td>
@@ -126,6 +133,8 @@
     <hr />
     <div style="display: none">
         <input type="text" class="M_ID" runat="server" id="M_ID" readonly="readonly" />
+        <input type="text" class="PP_ID" runat="server" id="PP_ID" readonly="readonly" />
+        <input type="text" class="M_TYPE" runat="server" id="M_TYPE" readonly="readonly" />
     </div>
     <div id="edit_div">
         <div class="row mb-2">
@@ -135,45 +144,42 @@
             </div>
             <div class="col-3">
                 <label for="recipient">收件人</label>
-                <input type="text" class="form-control recipient" autocomplete="off" runat="server" id="recipient" required="required" />
+                <input type="text" class="form-control recipient" autocomplete="off" runat="server" id="recipient" required="required"  />
             </div>
         </div>
         <div class="mb-2">
             <label for="Medicine">處方</label>
-            <input type="text" class="form-control medicine" runat="server" id="medicine" />
+            <input type="text" class="form-control medicine" runat="server" id="medicine" required="required" />
         </div>
         <div class="row mb-2">
             <div class="col-6">
                 <label for="cost">處置費用</label>
-                <input type="number" class="form-control cost" runat="server" id="cost" min="0" step="1" />
+                <input type="number" class="form-control cost" runat="server" id="cost" min="0" step="1" required="required" />
             </div>
             <div class="col-6">
                 <label for="Owed">欠費金額</label>
-                <input type="number" class="form-control Owed" runat="server" id="Owed" min="0" />
+                <input type="number" class="form-control Owed" runat="server" id="Owed" min="0"  />
             </div>
         </div>
         <div class="row mb-2">
-            <div class="col-1">
+            <div class="col-2">
                 <label for="Zipcode">郵遞區號</label>
                 <input type="text" class="form-control Zipcode" runat="server" id="Zipcode"/>
             </div>
-            <div class="col-11">
+            <div class="col-10">
                 <label for="Addr">地址</label>
-                <input type="text" class="form-control Addr" runat="server" id="Addr"/>
+                <input type="text" class="form-control Addr" runat="server" id="Addr" required="required"/>
             </div>
         </div>
         <div class="row mb-2 align-bottom">
             <div class="col-3">
-                <button id="btn_Insert" type="button" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-plus"></span>新增</button>
+                <asp:Button ID="bnt_new" runat="server" CssClass="btn btn-primary" Text="新增"  OnClick="btn_Insert_Click" />
+           </div>
+            <div class="col-3">
+                 <asp:Button ID="btn_delete" runat="server" CssClass="btn btn-danger btn_updated" Text="刪除" OnClick="btn_Delete_Click"  />
             </div>
             <div class="col-3">
-                <button id="btn_Delete" type="button" class="btn btn-danger" OnClientClick="btn_Delete_Click" OnClick="btn_Delete_Click">
-                    <span class="glyphicon glyphicon-remove-sign"></span>刪除</button>
-            </div>
-            <div class="col-3">
-                <button id="btn_Update" type="button" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-floppy-disk"></span>修改</button>
+               <asp:Button ID="btn_edit" runat="server" CssClass="btn btn-primary btn_updated" Text="修改" OnClick="btn_Update_Click" />
             </div>
             <div class="col-3">
                 <button id="btn_clear" type="button" class="btn btn-success">

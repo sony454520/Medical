@@ -5,6 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <script type="text/javascript">
         $(document).ready(function () {
+            
             $('#div_Wound').hide();
             $("#div_Wound").css("width", $("#ContentPlaceHolder1_Wound").width() + "px");
             $(".datepicker").datepicker({ //DatePicker
@@ -49,7 +50,7 @@
                 $(this).parent().nextAll().each(function () {
                     $('input.' + $(this).find('span').attr('class')).val($(this).find('span').html());
                 });
-                $('.PH_ID').val($(this).val());
+                $('#ContentPlaceHolder1_PH_ID').val($(this).val());
                 $('.btn_updated').attr('disabled', false);
             });
             $("input[type='number']").keyup(function () {
@@ -73,7 +74,9 @@
             //$("#ContentPlaceHolder1_Wound").focusout(function () {
                 //$('#div_Wound').hide();
             //});
-            
+            if ($('#ContentPlaceHolder1_PH_ID').val() != "") {
+                $('.ph_id[value='+$('#ContentPlaceHolder1_PH_ID').val() +']').click();
+            }
         });        
     </script>
     <h3>病歷資料(<span class="foo"><asp:Label ID="FullName" runat="server"></asp:Label></span>)</h3>
@@ -84,7 +87,7 @@
     <div id="show_data" >
         <asp:ListView ID="ListView1" runat="server">
          <LayoutTemplate>
-            <table id="my_table"class="table table-striped table-bordered" style="width:100%">
+            <table id="my_table" class="table table-striped table-bordered" style="width:100%">
               <thead>
                 <tr class="text-center">
                     <th runat="server">查<br/>看</th>

@@ -11,16 +11,17 @@ namespace Medical_treatment
     public partial class Medical_records1 : System.Web.UI.Page
     {
         ADOdatNET dataconect = new ADOdatNET();
-        string Patient, PatientName;
+        string Patient;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             Patient = Request.QueryString["Patient"];
-            PatientName = Request.QueryString["Name"];
-            FullName.Text = PatientName;
             if (Patient == null) Response.Write("<script  LANGUAGE='JavaScript'>alert('參數錯誤');location.href='Home.aspx'</script>");
             else if (!IsPostBack)
             {
+                string cmd = string.Format("select name from Patient where p_id = {0} ", Patient);
+                DataSet data = dataconect.getDataSet(cmd);
+                FullName.Text = data.Tables[0].Rows[0]["name"].ToString();
                 Update_ListView1();
             }
             P_ID.Text = Patient;
@@ -44,6 +45,9 @@ namespace Medical_treatment
             cmd += " Values((select ISNULL(max(PH_ID)+1,1) from Medical_records),CONVERT(datetime,'" + dataconect.ToSimpleUSDate(Hdate.Value) + "', 111),'" + Wound.Value + "','" + medicine.Value + "','" + cost.Value + "','" + Owed.Value +"','" + Patient + "',null,null)";
             if (dataconect.execsql(cmd)) Response.Write("<script  LANGUAGE='JavaScript'>alert('新增成功');</script>");
             else Response.Write("<script  LANGUAGE='JavaScript'>alert('新增失敗');</script>");
+            cmd = "select ISNULL(max(ph_id),0) max_ph_id from Medical_records ";
+            DataSet data = dataconect.getDataSet(cmd);
+            PH_ID.Value = data.Tables[0].Rows[0]["max_ph_id"].ToString(); 
             Update_ListView1();
         }
 

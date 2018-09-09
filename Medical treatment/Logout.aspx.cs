@@ -7,11 +7,12 @@ using System.Web.UI.WebControls;
 
 namespace Medical_treatment
 {
-    public partial class Site1 : System.Web.UI.MasterPage
+    public partial class Logout : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Account"] == null) Response.Write("<script>alert('連線逾時或尚未登入!'); location.href='login.aspx'; </script>");
+            Session["Account"] = null;
+            Response.Write("<script >alert('登出成功！'); location.href='Login.aspx';</script>");
         }
     }
 }

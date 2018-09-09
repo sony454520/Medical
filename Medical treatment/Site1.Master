@@ -9,48 +9,50 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <link href="Content/bootstrap-4.1.0.min.css" rel="stylesheet" />
-    <link href="Content/bootstrap-datepicker3.min.css" rel="stylesheet" />  
+    <link href="Content/bootstrap-datepicker3.min.css" rel="stylesheet" />
     <link href="Content/bootstrap3.3.7-glyphicon.css" rel="stylesheet" />
     <link href="Content/jquery-ui.css" rel="stylesheet" />
     <link href="Content/sweetalert.css" rel="stylesheet" />
-    <link href="Content/query.dataTables.min.css" rel="stylesheet" />    
+    <link href="Content/query.dataTables.min.css" rel="stylesheet" />
     <script src="Scripts/jquery-3.3.1.min.js"></script>
     <script src="Scripts/bootstrap-4.1.0.min.js"></script>
     <script src="Scripts/bootstrap-datepicker.min.js"></script>
     <script src="Scripts/locales/bootstrap-datepicker.zh-TW.min.js"></script>
     <script src="Scripts/jquery-ui.min.js"></script>
-    <script src="Scripts/sweetalert.js"></script>    
+    <script src="Scripts/sweetalert.js"></script>
     <script src="Scripts/jquery.dataTables.min.js"></script>
 </head>
 <body>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">                           
-                        <a class="nav-link" href="home.aspx" role="button" aria-haspopup="true">病患查詢</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">資料查詢
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                            <a class="dropdown-item" href="query_drug.aspx">郵寄藥物查詢</a>
-                            <a class="dropdown-item" href="query_case.aspx">病歷資料查詢</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">系統設定
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                            <a class="dropdown-item" href="#">更改登入密碼</a>
-                            <a class="dropdown-item" href="#">刪除舊郵寄資料</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="home.aspx" role="button" aria-haspopup="true">病患查詢</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">資料查詢
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                        <a class="dropdown-item" href="query_drug.aspx">郵寄藥物查詢</a>
+                        <a class="dropdown-item" href="query_case.aspx">病歷資料查詢</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">系統設定
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                        <%--<a class="dropdown-item" href="#">更改登入密碼</a>--%>
+                        <%--<a class="dropdown-item" href="#">刪除舊郵寄資料</a>--%>
+                        <a class="dropdown-item" href="Logout.aspx">登出</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <form id="form1" runat="server">
         <div class="container">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

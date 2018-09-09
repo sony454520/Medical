@@ -16,7 +16,12 @@ namespace Medical_treatment
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Home.aspx");
+            if (inputEmail.Value != "a" || inputPassword.Value != "a") Response.Write("<script >alert('帳號或密碼錯誤！');</script>");
+            else
+            {
+                Session["Account"] = "a";
+                Response.Redirect("Home.aspx");
+            }
         }
     }
 }

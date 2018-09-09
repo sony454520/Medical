@@ -95,6 +95,7 @@
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\query.dataTables.min.css" />
     <Content Include="Content\sweetalert.css" />
+    <Content Include="Logout.aspx" />
     <Content Include="Mail_records.aspx" />
     <Content Include="Medical_records.aspx" />
     <Content Include="Content\bootstrap-datepicker3.min.css.map" />
@@ -224,6 +225,13 @@
     </Compile>
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Mail_records.aspx.cs">
       <DependentUpon>Mail_records.aspx</DependentUpon>

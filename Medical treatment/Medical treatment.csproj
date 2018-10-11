@@ -78,6 +78,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap-4.1.0.min.css" />
     <Content Include="Content\bootstrap-datepicker3.min.css" />
+    <Content Include="Content\bootstrap-treeview.min.css" />
     <Content Include="Content\bootstrap3.3.7-glyphicon.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\loading.gif" />
@@ -93,6 +94,7 @@
     <Content Include="Content\images\ui-icons_cc0000_256x240.png" />
     <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery.fancybox.min.css" />
     <Content Include="Content\query.dataTables.min.css" />
     <Content Include="Content\sweetalert.css" />
     <Content Include="Logout.aspx" />
@@ -107,6 +109,7 @@
     <Content Include="Content\signin.css" />
     <Content Include="EditPatient.aspx" />
     <Content Include="login.aspx" />
+    <Content Include="MedicineView.aspx" />
     <Content Include="PrintProve.aspx" />
     <Content Include="PrintReceipt.aspx" />
     <Content Include="query_case.aspx" />
@@ -114,9 +117,11 @@
     <Content Include="Scripts\bootstrap-4.1.0.min.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\bootstrap-treeview.min.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.fancybox.min.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.ar.min.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.az.min.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.bg.min.js" />
@@ -184,6 +189,7 @@
     <Content Include="Scripts\locales\bootstrap-datepicker.zh-CN.min.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.zh-TW.min.js" />
     <Content Include="Scripts\sweetalert.js" />
+    <Content Include="ShowMedicine.aspx" />
     <Content Include="Site1.Master" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <None Include="Web.Debug.config">
@@ -247,6 +253,13 @@
     <Compile Include="Medical_records.aspx.designer.cs">
       <DependentUpon>Medical_records.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MedicineView.aspx.cs">
+      <DependentUpon>MedicineView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MedicineView.aspx.designer.cs">
+      <DependentUpon>MedicineView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PrintProve.aspx.cs">
       <DependentUpon>PrintProve.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -275,6 +288,13 @@
     </Compile>
     <Compile Include="query_drug.aspx.designer.cs">
       <DependentUpon>query_drug.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShowMedicine.aspx.cs">
+      <DependentUpon>ShowMedicine.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowMedicine.aspx.designer.cs">
+      <DependentUpon>ShowMedicine.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>
